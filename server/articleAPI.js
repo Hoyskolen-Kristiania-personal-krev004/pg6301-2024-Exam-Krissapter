@@ -12,7 +12,6 @@ export function createArticleRouter(db){
     articleAPI.post("/api/articles", async (req, res) => {
         const { headline, article, category, author } = req.body;
         await db.collection("articles").insertOne({ headline, article, category, author });
-        //ARTICLES.push({ headline, article, category, author, id: ARTICLES.length });
         res.sendStatus(204);
     });
 }

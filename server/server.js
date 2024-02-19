@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import * as path from "path";
 import {articleAPI, createArticleRouter} from "./articleAPI.js";
 import dotenv from "dotenv";
@@ -13,7 +12,7 @@ const app = express();
 app.listen(port);
 
 app.use(express.static("../client/dist"));
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(articleAPI);
 
 const url = process.env.MONGODB_URL;
