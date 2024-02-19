@@ -12,7 +12,12 @@ export function AddArticle(){
     async function handleSubmit(e){
         e.preventDefault();
 
-        await onNewArticle({ headline, article, category, author });
+        if (category==""){
+            setCategory("Tech");
+            await onNewArticle({ headline, article, category, author });
+        } else {
+            await onNewArticle({ headline, article, category, author });
+        }
     }
     return(
         <form onSubmit={handleSubmit}>
@@ -23,7 +28,7 @@ export function AddArticle(){
                 Article:<br/>
                 <textarea value={article} onChange={(e) => setArticle(e.target.value)}/><br/>
                 Category:<br/>
-                <select name={category} onChange={(e) => setCategory(e.target.value)}>
+                <select name={category} defaultValue={"Tech"} onChange={(e) => setCategory(e.target.value)} >
                     <option value={"Tech"}>Tech</option>
                     <option value={"Literature"}>Literature</option>
                     <option value={"World"}>World</option>
