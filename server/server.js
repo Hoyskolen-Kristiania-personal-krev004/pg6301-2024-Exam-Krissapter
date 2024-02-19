@@ -1,6 +1,7 @@
 import express from "express";
 import * as path from "path";
 import {articleAPI, createArticleRouter} from "./articleAPI.js";
+import {loginAPI} from "./loginAPI.js";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 
@@ -14,6 +15,7 @@ app.listen(port);
 app.use(express.static("../client/dist"));
 app.use(express.json());
 app.use(articleAPI);
+app.use(loginAPI);
 
 const url = process.env.MONGODB_URL;
 const dbClient = new MongoClient(url);
