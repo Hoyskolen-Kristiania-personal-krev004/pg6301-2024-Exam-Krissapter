@@ -4,7 +4,7 @@ import {ArticleContext} from "./articleContext";
 export function AddArticle(){
     const [headline, setHeadline] = useState("");
     const [article, setArticle] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("Tech");
     const [author, setAuthor] = useState("");
 
     const { onNewArticle } = useContext(ArticleContext);
@@ -12,12 +12,7 @@ export function AddArticle(){
     async function handleSubmit(e){
         e.preventDefault();
 
-        if (category==""){
-            setCategory("Tech");
-            await onNewArticle({ headline, article, category, author });
-        } else {
-            await onNewArticle({ headline, article, category, author });
-        }
+        await onNewArticle({ headline, article, category, author });
     }
     return(
         <form onSubmit={handleSubmit}>
@@ -28,8 +23,8 @@ export function AddArticle(){
                 Article:<br/>
                 <textarea value={article} onChange={(e) => setArticle(e.target.value)}/><br/>
                 Category:<br/>
-                <select name={category} defaultValue={"Tech"} onChange={(e) => setCategory(e.target.value)} >
-                    <option value={"Tech"}>Tech</option>
+                <select name={category} onChange={(e) => setCategory(e.target.value)} >
+                    <option value={"Tech"} selected>Tech</option>
                     <option value={"Literature"}>Literature</option>
                     <option value={"World"}>World</option>
                 </select><br/>
