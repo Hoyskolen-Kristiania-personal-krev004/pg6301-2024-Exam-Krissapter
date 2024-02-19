@@ -1,17 +1,16 @@
-import React, { useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import {ArticleContext} from "./articleContext";
 
 export function ListArticle(){
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
 
-
+    const { fetchArticles } = useContext(ArticleContext);
 
 
     async function loadArticles(){
-        const res = await fetch("/api/articles");
-
         setLoading(true);
-        setArticles(await res.json());
+        setArticles(await fetchArticles());
         setLoading(false);
     }
 
@@ -20,6 +19,7 @@ export function ListArticle(){
     }, []);
     return(
         <>
+            {loading && <div>Spinner</div>}
             {articles.map((a) => (
                 <div key={a.id}>
                     {a.headline} {a.article} {a.author} {a.category}

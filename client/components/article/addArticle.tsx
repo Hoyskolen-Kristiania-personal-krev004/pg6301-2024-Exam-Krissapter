@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import {ArticleContext} from "./articleContext";
 
 export function AddArticle(){
     const [headline, setHeadline] = useState("");
@@ -6,16 +7,12 @@ export function AddArticle(){
     const [category, setCategory] = useState("");
     const [author, setAuthor] = useState("");
 
+    const { onNewArticle } = useContext(ArticleContext);
+
     async function handleSubmit(e){
         e.preventDefault();
 
-        await fetch("/api/articles", {
-            method: "POST",
-            body: JSON.stringify({ headline, article, category, author }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+        await onNewArticle({ headline, article, category, author });
     }
     return(
         <form onSubmit={handleSubmit}>
