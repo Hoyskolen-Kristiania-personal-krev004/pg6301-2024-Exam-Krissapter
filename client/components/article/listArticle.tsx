@@ -1,8 +1,14 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ArticleContext} from "./articleContext";
-
+interface Article{
+    id: any;
+    headline: string;
+    article: string;
+    category: string;
+    author: string;
+}
 export function ListArticle(){
-    const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState<Array<Article>>([]);
     const [loading, setLoading] = useState(true);
 
     const { fetchArticles } = useContext(ArticleContext);
