@@ -1,9 +1,9 @@
 import express from "express";
 import * as path from "path";
 import {articleAPI, createArticleRouter} from "./articleAPI.js";
-import {loginAPI} from "./loginAPI.js";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ app.listen(port);
 app.use(express.static("../client/dist"));
 app.use(express.json());
 app.use(articleAPI);
-app.use(loginAPI);
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 const url = process.env.MONGODB_URL;
 const dbClient = new MongoClient(url);
@@ -23,6 +23,21 @@ const dbClient = new MongoClient(url);
 dbClient.connect().then((connection) => {
     const db = connection.db("article-db");
     createArticleRouter(db);
+});
+
+const loginAPI = express.Router();
+app.use("/api/login", loginAPI);
+
+
+loginAPI.post("", (req, res) => {
+    res.cookie("username", req.body.username, { signed: true });
+    res.sendStatus(204);
+});
+
+loginAPI.get("", (req, res) => {
+    const { username } = req.signedCookies;
+    req.user = { username }
+    res.send(req.user);
 });
 
 

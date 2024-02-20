@@ -11,6 +11,7 @@ export function ArticleRoutes(){
             <Route path={"/articles"} element={<ListArticle />} />
             <Route path={"/articles/new"} element={<AddArticle />} />
             <Route path={"/login"} element={<Login />} />
+            <Route path={"/profile"} element={<h2>Profile</h2>} />
             <Route path={"*"} element={<h2>Page not Found</h2>} />
         </Routes>
     );

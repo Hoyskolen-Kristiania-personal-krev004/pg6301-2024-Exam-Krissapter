@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {ArticleRoutes} from "../articleRoutes";
 import {ArticleContext} from "../article/articleContext";
+import {LoginNavLink} from "../login/loginNavLink";
 
 export function Application(){
 
@@ -18,7 +19,7 @@ export function Application(){
             body: JSON.stringify({ headline, article, category, author }),
             headers: {
                 "Content-Type": "application/json",
-            },
+            }
         });
     }
     return (
@@ -30,7 +31,7 @@ export function Application(){
                 <Link to={"/"}>Front Page</Link>
                 <Link to={"/articles"}>Articles</Link>
                 <Link to={"/articles/new"}>Add Articles</Link>
-                <Link to={"/login"}>Login</Link>
+                <LoginNavLink />
             </nav>
             <main>
                 <ArticleRoutes />

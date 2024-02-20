@@ -23,8 +23,8 @@ export function AddArticle(){
                 Article:<br/>
                 <textarea value={article} onChange={(e) => setArticle(e.target.value)}/><br/>
                 Category:<br/>
-                <select name={category} onChange={(e) => setCategory(e.target.value)} >
-                    <option value={"Tech"} selected>Tech</option>
+                <select name={category} defaultValue={"Tech"} onChange={(e) => setCategory(e.target.value)} >
+                    <option value={"Tech"}>Tech</option>
                     <option value={"Literature"}>Literature</option>
                     <option value={"World"}>World</option>
                 </select><br/>
