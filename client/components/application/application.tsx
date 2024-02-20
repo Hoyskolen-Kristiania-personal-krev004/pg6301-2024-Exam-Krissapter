@@ -39,7 +39,7 @@ export function Application(){
         });
     }
     return (
-        <LoginContext.Provider value={{ username } }>
+        <LoginContext.Provider value={{ username, loadUser } }>
         <ArticleContext.Provider value={{ fetchArticles, onNewArticle }}>
             <header>
                 <h1>News</h1>

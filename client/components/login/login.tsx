@@ -1,9 +1,11 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {LoginContext} from "./loginContext";
 
 export function Login(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const { loadUser } = useContext(LoginContext);
     const navigate = useNavigate();
 
     async function handleSubmit(e){
@@ -19,8 +21,8 @@ export function Login(){
         if (!res.ok){
             throw new Error("Something went wrong " + res.statusText);
         }
+        await loadUser();
         navigate("/");
-        window.location.reload();
     }
     return(
         <form onSubmit={handleSubmit}>
