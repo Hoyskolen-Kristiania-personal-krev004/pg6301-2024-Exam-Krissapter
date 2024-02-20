@@ -4,13 +4,14 @@ import {articleAPI, createArticleRouter} from "./articleAPI.js";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 import cookieParser from "cookie-parser";
+import {WebSocketServer} from "ws";
 
 dotenv.config();
 
 const port = process.env.PORT || 3000;
 const app = express();
 
-app.listen(port);
+const server = app.listen(port);
 
 app.use(express.static("../client/dist"));
 app.use(express.json());
@@ -82,6 +83,25 @@ app.use((req, res, next) => {
     } else {
         next();
     }
+});
+
+
+//Websockets
+const wsServer = new WebSocketServer({ noServer: true });
+const sockets = [];
+
+server.on("upgrade", (req, socket, head) => {
+    wsServer.handleUpgrade(req, socket, head, (socket) => {
+        sockets.push(socket);
+        socket.send("Hello from server");
+
+        socket.on("message", (message) => {
+            console.log(message.toString());
+            for (const s of sockets){
+                s.send("update");
+            }
+        });
+    });
 });
 
 console.log(`Server started and is listening on  http://localhost:${port}`);

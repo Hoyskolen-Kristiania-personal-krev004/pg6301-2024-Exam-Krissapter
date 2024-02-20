@@ -1,19 +1,29 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ArticleContext} from "./articleContext";
+import {useNavigate} from "react-router-dom";
 
 export function AddArticle(){
     const [headline, setHeadline] = useState("");
     const [article, setArticle] = useState("");
     const [category, setCategory] = useState("Tech");
     const [author, setAuthor] = useState("");
+    const [webSocket, setWebsocket] = useState<WebSocket>();
+
+    const navigate = useNavigate();
 
     const { onNewArticle } = useContext(ArticleContext);
 
     async function handleSubmit(e: React.SyntheticEvent){
         e.preventDefault();
 
+        webSocket?.send("New Article Added");
         await onNewArticle({ headline, article, category, author });
+
+        navigate("/articles");
     }
+    useEffect(() => {
+        setWebsocket(new WebSocket("ws://" + window.location.host));
+    }, []);
     return(
         <form onSubmit={handleSubmit}>
             <h1>Add Article</h1>

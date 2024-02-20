@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ArticleContext} from "./articleContext";
+
 interface Article{
     id: any;
     headline: string;
@@ -10,6 +11,7 @@ interface Article{
 export function ListArticle(){
     const [articles, setArticles] = useState<Array<Article>>([]);
     const [loading, setLoading] = useState(true);
+    const [websocket, setWebsocket] = useState<WebSocket>();
 
     const { fetchArticles } = useContext(ArticleContext);
 
@@ -21,6 +23,12 @@ export function ListArticle(){
     }
 
     useEffect(() => {
+        const webSocket = new WebSocket("ws://" + window.location.host);
+        webSocket.onmessage = (event) => {
+            console.log(event.data);
+            loadArticles();
+        };
+        setWebsocket(webSocket);
         loadArticles();
     }, []);
     return(
