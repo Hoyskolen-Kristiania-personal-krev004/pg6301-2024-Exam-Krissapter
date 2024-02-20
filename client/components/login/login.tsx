@@ -20,6 +20,7 @@ export function Login(){
             throw new Error("Something went wrong " + res.statusText);
         }
         navigate("/");
+        window.location.reload();
     }
     return(
         <form onSubmit={handleSubmit}>

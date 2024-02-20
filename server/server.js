@@ -39,7 +39,10 @@ loginAPI.get("", (req, res) => {
     req.user = { username }
     res.send(req.user);
 });
-
+loginAPI.delete("", (req, res) => {
+    res.clearCookie("username");
+    res.sendStatus(204);
+})
 
 app.use((req, res, next) => {
     if (req.method === "GET" && !req.path.startsWith("/api")) {
