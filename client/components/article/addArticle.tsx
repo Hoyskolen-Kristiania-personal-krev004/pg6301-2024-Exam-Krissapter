@@ -22,7 +22,7 @@ export function AddArticle(){
         navigate("/articles");
     }
     useEffect(() => {
-        setWebsocket(new WebSocket("ws://" + window.location.host));
+        setWebsocket(new WebSocket(window.location.origin.replace(/^http/, "ws")));
     }, []);
     return(
         <form onSubmit={handleSubmit}>

@@ -93,8 +93,6 @@ const sockets = [];
 server.on("upgrade", (req, socket, head) => {
     wsServer.handleUpgrade(req, socket, head, (socket) => {
         sockets.push(socket);
-        socket.send("Hello from server");
-
         socket.on("message", (message) => {
             console.log(message.toString());
             for (const s of sockets){

@@ -23,10 +23,12 @@ export function ListArticle(){
     }
 
     useEffect(() => {
-        const webSocket = new WebSocket("ws://" + window.location.host);
+        const webSocket = new WebSocket(window.location.origin.replace(/^http/, "ws"));
         webSocket.onmessage = (event) => {
             console.log(event.data);
-            loadArticles();
+            setTimeout(() => {
+                loadArticles();
+            }, 250);
         };
         setWebsocket(webSocket);
         loadArticles();
