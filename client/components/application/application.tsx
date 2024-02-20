@@ -6,8 +6,9 @@ import {LoginNavLink} from "../login/loginNavLink";
 import {LoginContext} from "../login/loginContext";
 
 export function Application(){
-
+    const [user, setUser] = useState("");
     const [username, setUsername] = useState("");
+    const GOOGLE_CLIENT_ID = "1012467571987-l81oipbjpa6tg3qmkk0jge7vorfrjsau.apps.googleusercontent.com";
 
     async function loadUser(){
         const res = await fetch("/api/login");
@@ -16,6 +17,7 @@ export function Application(){
         }
         const user = await res.json();
         setUsername(user.username);
+        setUser(user);
     }
 
     useEffect(() => {
@@ -39,7 +41,7 @@ export function Application(){
         });
     }
     return (
-        <LoginContext.Provider value={{ username, loadUser } }>
+        <LoginContext.Provider value={{ username, user, loadUser, client_id: GOOGLE_CLIENT_ID} }>
         <ArticleContext.Provider value={{ fetchArticles, onNewArticle }}>
             <header>
                 <h1>News</h1>

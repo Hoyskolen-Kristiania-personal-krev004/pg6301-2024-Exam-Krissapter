@@ -3,7 +3,7 @@ import {LoginContext} from "../login/loginContext";
 import {useNavigate} from "react-router-dom";
 
 export function ProfilePage(){
-    const { username, loadUser } = useContext(LoginContext);
+    const { username, user, loadUser } = useContext(LoginContext);
     const navigate = useNavigate();
     async function handleLogout(e: React.SyntheticEvent){
         e.preventDefault();

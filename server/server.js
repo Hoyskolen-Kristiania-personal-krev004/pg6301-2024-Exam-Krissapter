@@ -25,10 +25,30 @@ dbClient.connect().then((connection) => {
     createArticleRouter(db);
 });
 
+const DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration";
 
-app.use((req, res, next) => {
-    const { username } = req.signedCookies;
-    req.user = { username };
+app.use(async (req, res, next) => {
+    const { username, access_token } = req.signedCookies;
+
+    if (access_token){
+        const res = await fetch(DISCOVERY_URL);
+        const discoveryDoc = await res.json();
+
+        const userInfoRes = await fetch(discoveryDoc.userinfo_endpoint, {
+            headers: {
+                Authorization: `Bearer ${access_token}`
+            }
+        });
+
+        if (!userInfoRes.ok){
+            throw new Error("Error" + userInfoRes.status + " " + userInfoRes.statusText);
+        }
+
+        const userInfo = await userInfoRes.json();
+        req.user = {userInfo, username: userInfo.email};
+    }else {
+        req.user = { username };
+    }
     next();
 })
 
@@ -47,6 +67,12 @@ loginAPI.get("", (req, res) => {
 });
 loginAPI.delete("", (req, res) => {
     res.clearCookie("username");
+    res.clearCookie("access_token");
+    res.sendStatus(204);
+});
+
+loginAPI.post("/access_token", (req, res) => {
+    res.cookie("access_token", req.body.access_token, { signed: true });
     res.sendStatus(204);
 })
 

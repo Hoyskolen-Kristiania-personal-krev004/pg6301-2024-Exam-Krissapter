@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {LoginContext} from "./loginContext";
+import {OpenAuthLogin} from "./openAuthLogIn";
 
 export function Login(){
     const [username, setUsername] = useState("");
@@ -25,6 +26,7 @@ export function Login(){
         navigate("/");
     }
     return(
+        <>
         <form onSubmit={handleSubmit}>
             <h3>Log In</h3>
             <div>
@@ -37,5 +39,7 @@ export function Login(){
             </div>
             <button>Log In</button>
         </form>
+        <OpenAuthLogin />
+        </>
     );
 }
