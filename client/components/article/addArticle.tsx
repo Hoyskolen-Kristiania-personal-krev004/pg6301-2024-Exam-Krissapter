@@ -9,7 +9,7 @@ export function AddArticle(){
 
     const { onNewArticle } = useContext(ArticleContext);
 
-    async function handleSubmit(e){
+    async function handleSubmit(e: React.SyntheticEvent){
         e.preventDefault();
 
         await onNewArticle({ headline, article, category, author });

@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {LoginContext} from "./loginContext";
 
@@ -8,7 +8,7 @@ export function Login(){
     const { loadUser } = useContext(LoginContext);
     const navigate = useNavigate();
 
-    async function handleSubmit(e){
+    async function handleSubmit(e: React.SyntheticEvent){
         e.preventDefault();
 
         const res = await fetch("/api/login", {
