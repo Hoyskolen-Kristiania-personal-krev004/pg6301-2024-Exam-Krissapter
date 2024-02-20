@@ -30,8 +30,6 @@ export function Application(){
         return res.json();
     }
     async function onNewArticle({ headline, article, category, author }:{headline:any, article:any, category:any, author:any}){
-
-        console.log(headline, article, category, author)
         await fetch("/api/articles", {
             method: "POST",
             body: JSON.stringify({ headline, article, category, author }),

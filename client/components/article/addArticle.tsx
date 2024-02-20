@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ArticleContext} from "./articleContext";
 import {useNavigate} from "react-router-dom";
+import {LoginContext} from "../login/loginContext";
 
 export function AddArticle(){
     const [headline, setHeadline] = useState("");
@@ -8,6 +9,7 @@ export function AddArticle(){
     const [category, setCategory] = useState("Tech");
     const [author, setAuthor] = useState("");
     const [webSocket, setWebsocket] = useState<WebSocket>();
+    const { username } = useContext(LoginContext);
 
     const navigate = useNavigate();
 
@@ -22,6 +24,7 @@ export function AddArticle(){
         navigate("/articles");
     }
     useEffect(() => {
+        setAuthor(username);
         setWebsocket(new WebSocket(window.location.origin.replace(/^http/, "ws")));
     }, []);
     return(
@@ -38,8 +41,6 @@ export function AddArticle(){
                     <option value={"Literature"}>Literature</option>
                     <option value={"World"}>World</option>
                 </select><br/>
-                Author:<br/>
-                <input value={author} onChange={(e) => setAuthor(e.target.value)} />
             </div>
             <div>
                 <button>Submit</button>
