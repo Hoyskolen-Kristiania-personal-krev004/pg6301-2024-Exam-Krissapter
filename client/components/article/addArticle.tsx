@@ -29,9 +29,9 @@ export function AddArticle(){
             <h1>Add Article</h1>
             <div>
                 Headline:<br/>
-                <input value={headline} onChange={(e) => setHeadline(e.target.value)}/><br/>
+                <input value={headline} onChange={(e) => setHeadline(e.target.value)} required/><br/>
                 Article:<br/>
-                <textarea value={article} onChange={(e) => setArticle(e.target.value)}/><br/>
+                <textarea value={article} onChange={(e) => setArticle(e.target.value)} required/><br/>
                 Category:<br/>
                 <select name={category} defaultValue={"Tech"} onChange={(e) => setCategory(e.target.value)} >
                     <option value={"Tech"}>Tech</option>
