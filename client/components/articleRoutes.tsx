@@ -5,11 +5,12 @@ import {AddArticle} from "./article/addArticle";
 import {Login} from "./login/login";
 import {ProfilePage} from "./profile/profilePage";
 import {LoginCallBack} from "./login/loginCallBack";
+import {FrontPage} from "./article/frontPage";
 
 export function ArticleRoutes(){
     return(
         <Routes>
-            <Route path={"/"} element={<h2>Front Page</h2>} />
+            <Route path={"/"} element={<FrontPage />} />
             <Route path={"/articles"} element={<ListArticle />} />
             <Route path={"/articles/new"} element={<AddArticle />} />
             <Route path={"/login"} element={<Login />} />
