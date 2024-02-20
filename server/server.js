@@ -25,6 +25,14 @@ dbClient.connect().then((connection) => {
     createArticleRouter(db);
 });
 
+
+app.use((req, res, next) => {
+    const { username } = req.signedCookies;
+    req.user = { username };
+    next();
+})
+
+
 const loginAPI = express.Router();
 app.use("/api/login", loginAPI);
 
@@ -35,8 +43,6 @@ loginAPI.post("", (req, res) => {
 });
 
 loginAPI.get("", (req, res) => {
-    const { username } = req.signedCookies;
-    req.user = { username }
     res.send(req.user);
 });
 loginAPI.delete("", (req, res) => {
