@@ -23,7 +23,7 @@ export function AddArticle(){
         setAuthor(username);
         setWebsocket(new WebSocket(window.location.origin.replace(/^http/, "ws")));
     }, []);
-    if(!username){
+    if(username){
         return(
             <form onSubmit={handleSubmit}>
                 <h1>Add Article</h1>
