@@ -45,7 +45,9 @@ export function ListArticle(){
                 {loading && <div>Spinner</div>}
                 {articles.map((a) => (
                     <div key={a._id}>
-                        {a.headline} {a.article} {a.author} {a.category}
+                        <h2>{a.category}: {a.headline}</h2>
+                        <p>{a.article}</p>
+                        {a.author}
                     </div>
                 ))}
             </>

@@ -4,6 +4,7 @@ import {ArticleRoutes} from "../articleRoutes";
 import {ArticleContext} from "../article/articleContext";
 import {LoginNavLink} from "../login/loginNavLink";
 import {LoginContext} from "../login/loginContext";
+import "../../App.css"
 
 export function Application(){
     const [user, setUser] = useState("");
@@ -45,18 +46,20 @@ export function Application(){
     return (
         <LoginContext.Provider value={{ username, user, loadUser, client_id: GOOGLE_CLIENT_ID} }>
         <ArticleContext.Provider value={{ fetchArticles, onNewArticle }}>
-            <header>
-                <h1>News</h1>
-            </header>
-            <nav>
-                <Link to={"/"}>Front Page</Link>
-                <Link to={"/articles"}>Articles</Link>
-                <Link to={"/articles/new"}>Add Articles</Link>
-                <LoginNavLink />
-            </nav>
-            <main>
-                <ArticleRoutes />
-            </main>
+            <div class="container">
+                <header>
+                    <h1>News</h1>
+                </header>
+                <nav>
+                    <Link to={"/"}>Front Page</Link><br/>
+                    <Link to={"/articles"}>Articles</Link><br/>
+                    <Link to={"/articles/new"}>Add Articles</Link><br/>
+                    <LoginNavLink />
+                </nav>
+                <main>
+                    <ArticleRoutes />
+                </main>
+            </div>
         </ArticleContext.Provider>
         </LoginContext.Provider>
     );
