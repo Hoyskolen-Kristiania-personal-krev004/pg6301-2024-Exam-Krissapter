@@ -13,7 +13,6 @@ interface Article{
 export function ListArticle(){
     const [articles, setArticles] = useState<Array<Article>>([]);
     const [loading, setLoading] = useState(true);
-    const [websocket, setWebsocket] = useState<WebSocket>();
     const { username } = useContext(LoginContext);
 
     const { fetchArticles } = useContext(ArticleContext);
@@ -21,8 +20,13 @@ export function ListArticle(){
 
     async function loadArticles(){
         setLoading(true);
-        setArticles(await fetchArticles());
-        setLoading(false);
+        try{
+            setArticles(await fetchArticles());
+        }catch (err){
+            console.log("FUCK!");
+        }finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
@@ -33,7 +37,6 @@ export function ListArticle(){
                 loadArticles();
             }, 250);
         };
-        setWebsocket(webSocket);
         loadArticles();
     }, []);
     if(username){
@@ -49,7 +52,10 @@ export function ListArticle(){
         );
     } else{
         return (
-            <Login />
+            <div>
+                <h3>Please log in to read articles</h3><br/>
+                <Login />
+            </div>
         );
     }
 }

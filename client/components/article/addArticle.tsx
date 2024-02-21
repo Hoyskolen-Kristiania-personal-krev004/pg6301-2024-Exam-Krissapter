@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ArticleContext} from "./articleContext";
-import {useNavigate} from "react-router-dom";
 import {LoginContext} from "../login/loginContext";
 
 export function AddArticle(){
@@ -11,8 +10,6 @@ export function AddArticle(){
     const [webSocket, setWebsocket] = useState<WebSocket>();
     const { username } = useContext(LoginContext);
 
-    const navigate = useNavigate();
-
     const { onNewArticle } = useContext(ArticleContext);
 
     async function handleSubmit(e: React.SyntheticEvent){
@@ -20,8 +17,6 @@ export function AddArticle(){
 
         webSocket?.send("New Article Added");
         await onNewArticle({ headline, article, category, author });
-
-        navigate("/articles");
     }
     useEffect(() => {
         setAuthor(username);

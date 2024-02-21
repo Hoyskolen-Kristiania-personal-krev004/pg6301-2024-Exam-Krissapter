@@ -36,6 +36,10 @@ export function Application(){
             headers: {
                 "Content-Type": "application/json",
             }
+        }).then(function (response){
+            if (!response.ok){
+                alert("That headline already exists");
+            }
         });
     }
     return (
