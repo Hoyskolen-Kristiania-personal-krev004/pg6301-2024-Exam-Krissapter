@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently npm:dev:client npm:dev:server",
-    "dev:client": "cd client && npm run dev --include=dev",
+    "dev": "concurrently npm:dev:client npm:dev:server",
+    "dev:client": "cd client && npm run dev",
     "dev:server": "cd server && npm run dev",
     "test": "npm run test:client && npm run test:server",
     "test:client": "cd client && npm test",
     "test:server": "cd server && npm test",
     "inst": "npm install && npm run inst:client && npm run inst:server",
-    "inst:client": "cd client && npm install",
-    "inst:server": "cd server && npm install"
+    "inst:client": "cd client && npm install --include=dev",
+    "inst:server": "cd server && npm install --include=dev",
+    "postinstall": "npm run inst:client && npm run inst:server",
+    "build": "npm run build:client",
+    "build:client": "cd client && npm run build",
+    "start": "cd server && npm run start"
   },
   "keywords": [],
   "author": "",

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "parcel watch index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "check:typescript": "tsc --noEmit"
+    "check:typescript": "tsc --noEmit",
+    "build": "parcel build index.html"
   },
   "keywords": [],
   "author": "",
