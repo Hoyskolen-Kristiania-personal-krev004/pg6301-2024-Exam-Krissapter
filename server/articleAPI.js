@@ -28,13 +28,16 @@ export function createArticleRouter(db){
     });
     articleAPI.put("/api/articles/:headline", async (req, res) => {
         const { article, category } = req.body;
+        const findArticle = await db.collection("articles").findOne(req.params);
 
-        await db.collection("articles").update(
-            { headline: req.params },
+        await db.collection("articles").updateOne(
             {
-                $set: {
-                    article: article,
-                    category: category
+                "headline": req.params
+            },
+            {
+                $set:{
+                    "article": article,
+                    "category": category
                 }
             }
         );
