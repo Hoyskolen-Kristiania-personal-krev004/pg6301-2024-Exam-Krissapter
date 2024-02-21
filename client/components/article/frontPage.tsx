@@ -34,7 +34,7 @@ export function FrontPage(){
             {loading && <div>Spinner</div>}
             {articles.map((a) => (
                 <div key={a.id}>
-                    {a.headline} {a.category}
+                    <h2>{a.category}: {a.headline}</h2>
                 </div>
             ))}
         </>

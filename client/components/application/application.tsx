@@ -4,7 +4,7 @@ import {ArticleRoutes} from "../articleRoutes";
 import {ArticleContext} from "../article/articleContext";
 import {LoginNavLink} from "../login/loginNavLink";
 import {LoginContext} from "../login/loginContext";
-import "../../App.css"
+import "../../App.css";
 
 export function Application(){
     const [user, setUser] = useState("");
@@ -46,7 +46,7 @@ export function Application(){
     return (
         <LoginContext.Provider value={{ username, user, loadUser, client_id: GOOGLE_CLIENT_ID} }>
         <ArticleContext.Provider value={{ fetchArticles, onNewArticle }}>
-            <div class="container">
+            <div className={"container"}>
                 <header>
                     <h1>News</h1>
                 </header>
