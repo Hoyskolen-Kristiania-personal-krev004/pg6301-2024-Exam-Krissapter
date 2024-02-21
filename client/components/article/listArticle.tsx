@@ -4,7 +4,7 @@ import {LoginContext} from "../login/loginContext";
 import {Login} from "../login/login";
 
 interface Article{
-    id: any;
+    _id: any;
     headline: string;
     article: string;
     category: string;
@@ -44,7 +44,7 @@ export function ListArticle(){
             <>
                 {loading && <div>Spinner</div>}
                 {articles.map((a) => (
-                    <div key={a.id}>
+                    <div key={a._id}>
                         {a.headline} {a.article} {a.author} {a.category}
                     </div>
                 ))}

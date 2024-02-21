@@ -3,7 +3,7 @@ import {LoginContext} from "../login/loginContext";
 import {useNavigate} from "react-router-dom";
 
 interface Article{
-    id: any;
+    _id: any;
     headline: string;
     article: string;
     category: string;
@@ -33,6 +33,21 @@ export function ProfilePage(){
             setLoading(false);
         }
     }
+    function handleEdit(){
+        return(
+            <div>Hey</div>
+        );
+    }
+
+    async function handleDelete(e: React.MouseEvent<HTMLButtonElement>){
+        e.preventDefault();
+        let headline = e.currentTarget.value
+        const res = await fetch(`/api/articles/${headline}`, { method: "DELETE" });
+
+        if (!res.ok){
+            throw new Error("Failed to delete article " + res.status + " " + res.statusText);
+        }
+    }
 
     async function handleLogout(e: React.SyntheticEvent){
         e.preventDefault();
@@ -52,15 +67,17 @@ export function ProfilePage(){
     return(
         <>
             <h2>{ username }</h2>
-            {loading}
-            {articles.map((a) => (
-                <div key={a.id}>
-                    {a.headline} {a.article} {a.author} {a.category}
-                </div>
-            ))}
             <form onSubmit={handleLogout}>
                 <button>Log Out</button>
             </form>
+            {loading}
+            {articles.map((a) => (
+                <div key={a._id}>
+                    <h3>{a.headline} {a.category}</h3>
+                    <p>{a.article} <button value = {a.headline} onClick={handleEdit}>Edit Article</button> <button value = {a.headline} onClick={handleDelete}>Delete Article</button></p>
+                    <div>{a.author}</div>
+                </div>
+            ))}
         </>
     )
 }
