@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`news application renders front page 1`] = `
+<div
+  className="container"
+>
+  <header>
+    <h1>
+      News
+    </h1>
+  </header>
+  <nav>
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      Front Page
+    </a>
+    <br />
+    <a
+      href="/articles"
+      onClick={[Function]}
+    >
+      Articles
+    </a>
+    <br />
+    <a
+      href="/articles/new"
+      onClick={[Function]}
+    >
+      Add Articles
+    </a>
+    <br />
+    <a
+      href="/login"
+      onClick={[Function]}
+    >
+      Log In
+    </a>
+  </nav>
+  <main>
+    <div>
+      Spinner
+    </div>
+  </main>
+</div>
+`;

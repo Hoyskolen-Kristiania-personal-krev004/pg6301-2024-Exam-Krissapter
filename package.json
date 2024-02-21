@@ -16,13 +16,19 @@
     "postinstall": "npm run inst:client && npm run inst:server",
     "build": "npm run build:client",
     "build:client": "cd client && npm run build",
-    "start": "cd server && npm run start"
+    "start": "cd server && npm run start",
+    "prepare": "husky",
+    "check": "npm run check:prettier && npm run check:typescript:client",
+    "check:prettier": "prettier --check .",
+    "write:prettier": "prettier --write .",
+    "check:typescript:client": "cd client && npm run check:typescript"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "husky": "^9.0.11",
     "prettier": "^3.2.5"
   }
 }
