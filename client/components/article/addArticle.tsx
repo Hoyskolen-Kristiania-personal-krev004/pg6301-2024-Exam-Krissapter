@@ -47,7 +47,7 @@ export function AddArticle(){
     } else {
         return (
             <div>
-                <h3>Please log in to read articles</h3><br/>
+                <h3>Please log in to add articles</h3><br/>
                 <Login />
             </div>
         );
